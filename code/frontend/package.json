@@ -1,0 +1,32 @@
+{
+  "name": "project-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --no-lint && tsc --noEmit || true",
+    "start": "next start",
+    "export": "next export",
+    "lint": "next lint",
+    "clean": "if exist .next rmdir /s /q .next",
+    "fresh": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
+    "next": "15.3.1",
+    "react": "^19.0.0",
+    "react-chartjs-2": "^5.3.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.1",
+    "typescript": "^5"
+  }
+}

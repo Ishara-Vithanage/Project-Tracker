@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Antic&display=swap');
+
+.mainContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  width: 460px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--foreground);
+  padding-bottom: 5px;
+}
+
+.top_section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+  background-color: #F4F4F4;
+  box-shadow: 0 8px 24px rgba(49, 100, 121, 0.2);
+  border-radius: 10px 10px 0 0;
+}
+
+.logo {
+  width: 80%;
+  height: auto;
+}
+
+.middle_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  margin-bottom: 10%;
+}
+
+.label {
+  font-family: 'Antic', sans-serif;
+  font-size: 12px;
+  padding: 5px;
+  color: var(--foreground);
+  letter-spacing: 1px;
+}
+
+.error_message {
+  font-family: 'Antic', sans-serif;
+  font-size: 12px;
+  padding: 5px;
+  color: rgb(155, 2, 2);
+  letter-spacing: 1px;
+}
+
+.btSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.submit_button {
+  border-radius: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 20px;
+  width: 30%;
+}
+
+.footer {
+  font-size: 10px;
+  color: var(--foreground);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 0.6;
+  margin-top: 1rem;
+}
+
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.spinner {
+  border: 6px solid #ccc;
+  border-top: 6px solid #7a1111;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+.loadingText {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

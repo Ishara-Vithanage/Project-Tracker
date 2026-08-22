@@ -1,0 +1,201 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+  z-index: 1000;
+}
+
+.popup {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+  max-height: 90vh;
+  min-height: 80vh;
+  overflow-y: auto;
+  transform: translateY(-10px);
+  animation: slideIn 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.header {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+.info {
+  margin-bottom: 8px;
+  color: #374151;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 14px;
+  margin: 20px 0;
+  font-size: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+}
+
+.noProjects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.projectCard {
+  background: #f9fafb;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  transition: box-shadow 0.3s ease;
+}
+
+.projectCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.projectHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.projectName {
+  font-weight: 600;
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.projectRight {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.projectStatus {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* .viewTaskButton {
+  padding: 6px 12px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.viewTaskButton:hover {
+  background-color: #2563eb;
+} */
+
+.taskList {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  margin-top: 10px;
+}
+
+.show {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 15px;
+  color: #374151;
+}
+
+.taskStatus {
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.projectStatus {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+}
+
+/* Status-specific color backgrounds */
+.statusNotStarted {
+  background-color: #9ca3af; /* Gray */
+}
+
+.statusInProgress {
+  background-color: #3b82f6; /* Blue */
+}
+
+.statusUAT {
+  background-color: #8b5cf6; /* Purple */
+}
+
+.statusOnHold {
+  background-color: #f97316; /* Orange */
+}
+
+.statusCompleted {
+  background-color: #10b981; /* Green */
+}
+
+
+@keyframes fadeIn {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

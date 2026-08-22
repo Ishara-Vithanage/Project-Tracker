@@ -1,0 +1,226 @@
+/* ── Page wrapper ────────────────────────────────────────────── */
+.wrapper {
+  background: #efefef;
+  min-height: 100vh;
+  padding: 32px 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── A4-like paper surface ───────────────────────────────────── */
+.paper {
+  background: #ffffff;
+  width: 100%;
+  max-width: 760px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.14);
+  padding: 36px 42px 40px;
+  border-top: 3px solid #000000;
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 14px;
+}
+
+.headerLeft {}
+
+.logo {
+  height: 44px;
+  object-fit: contain;
+  display: block;
+}
+
+.headerRight {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reportLabel {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #000000;
+  line-height: 1;
+}
+
+.metaLine {
+  font-size: 10px;
+  color: #888888;
+  letter-spacing: 0.3px;
+}
+
+/* ── Rules ───────────────────────────────────────────────────── */
+.headerRule {
+  border: none;
+  border-top: 2px solid #000000;
+  margin: 0 0 16px;
+}
+
+.thinRule {
+  border: none;
+  border-top: 1px solid #d5d5d5;
+  margin: 20px 0;
+}
+
+/* ── Title row ───────────────────────────────────────────────── */
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.projectName {
+  font-size: 17px;
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: 1px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.statusBox {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  border: 1.5px solid #000000;
+  padding: 3px 10px;
+  color: #000000;
+  white-space: nowrap;
+}
+
+/* ── Section ─────────────────────────────────────────────────── */
+.section {
+  margin-top: 4px;
+}
+
+.sectionLabel {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #888888;
+  margin: 0 0 10px;
+  border-bottom: 1px solid #000000;
+  padding-bottom: 4px;
+  text-transform: uppercase;
+}
+
+/* ── Info grid ───────────────────────────────────────────────── */
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 6px;
+  column-gap: 20px;
+}
+
+.infoRow {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.infoLabel {
+  font-weight: 700;
+  color: #555555;
+  min-width: 88px;
+  flex-shrink: 0;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+
+.infoValue {
+  color: #111111;
+  word-break: break-word;
+  font-size: 11px;
+}
+
+/* ── Task card ───────────────────────────────────────────────── */
+.taskCard {
+  border: 1px solid #d8d8d8;
+  margin-bottom: 10px;
+  border-left: 3px solid #000000;
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 12px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.taskHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.taskIndex {
+  font-size: 11px;
+  font-weight: 700;
+  color: #000000;
+  font-variant-numeric: tabular-nums;
+}
+
+.taskNameText {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.taskStatusBox {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  border: 1px solid #000000;
+  padding: 2px 8px;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.taskBody {
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 5px;
+  column-gap: 20px;
+}
+
+/* ── Download actions ────────────────────────────────────────── */
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.downloadBtn {
+  background: #000000;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 11px 36px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.downloadBtn:hover {
+  background: #333333;
+}

@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css?family=ABeeZee&display=swap');
+
+.main_container {
+  display: flex;
+  height: 100%;
+}
+
+.left_panel {
+  width: 260px;
+  height: 100%;
+  border-radius: 0 10px 10px 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid var(--border);
+}
+
+.left_top_section {
+  padding-top: 20px;
+  height: 30%;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.title {
+  font-family: 'Antic', sans-serif;
+  letter-spacing: 8px;
+  font-weight: 800;
+  font-size: 26px;
+  color: var(--foreground);
+}
+
+.left_middle_section {
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+}
+
+.navList {
+  list-style-type: none;
+  padding-top: 36px;
+  overflow-x: auto;
+}
+
+.navLine {
+  font-family: 'ABeeZee', sans-serif;
+  padding: 16px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 0 10px 10px 0;
+  letter-spacing: 2px;
+  color: var(--foreground);
+  cursor: pointer;
+}
+
+.navLine:hover,
+.navLineLogout:hover {
+  background-color: var(--accent);
+  color: white;
+}
+
+.active {
+  font-weight: bold;
+  border-left: 4px solid var(--accent);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.navLineLogout {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 16px 20px;
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.logoutIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.left_bottom_section {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 10%;
+  gap: 10px;
+  border-radius: 0 0 20px 0;
+  transition: background-color 0.3s ease;
+}
+
+.userImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.userName,
+.lastLogin,
+.loginTime {
+  font-family: 'ABeeZee', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 0 20px 20px 0;
+  color: var(--foreground);
+  cursor: default
+}
+
+.userName {
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+
+.userInfo {
+  list-style-type: none;
+}
+
+.lastLogin,
+.loginTime {
+  padding-bottom: 2px;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.right_panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 84%;
+  padding: 20px 40px 10px 40px;
+}
+
+.content_box {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(50px);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: auto;
+}
+
+.footer_section {
+  height: 5%;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  opacity: 0.7;
+}
+
+.footer_section p {
+  color: black;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+@media (max-width: 1024px) {
+  .left_panel {
+    width: 200px;
+  }
+
+  .title {
+    font-size: 22px;
+    letter-spacing: 4px;
+  }
+
+  .navLine,
+  .navLineLogout {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .right_panel {
+    padding: 16px 24px 10px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main_container {
+    flex-direction: column;
+  }
+
+  .left_panel {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    overflow-x: auto;
+  }
+
+  .left_top_section,
+  .left_middle_section,
+  .left_bottom_section {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 10px;
+  }
+
+  .navList {
+    display: flex;
+    flex-direction: row;
+    padding-top: 0;
+    overflow-x: auto;
+  }
+
+  .navLine,
+  .navLineLogout {
+    border-radius: 10px;
+  }
+
+  .right_panel {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .footer_section p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+
+  .navLine,
+  .navLineLogout {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .userImg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .userName {
+    font-size: 10px;
+  }
+
+  .lastLogin,
+  .loginTime {
+    font-size: 9px;
+  }
+}

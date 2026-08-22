@@ -1,0 +1,96 @@
+.container {
+  padding: 16px;
+  border-radius: 12px;
+  max-height: 360px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 12px;
+}
+
+.nullText {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.projectCard {
+  display: flex;
+  align-items: stretch; /* ensures sideLine matches height */
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  padding: 0 16px 0 0;
+}
+
+.sideLine {
+  width: 4px;
+  border-radius: 4px;
+  margin-right: 12px;
+  height: 50px
+}
+
+/* Status color bars */
+.notStarted {
+  background-color: #9ca3af;
+}
+
+.inProgress {
+  background-color: #3b82f6;
+}
+
+.uat {
+  background-color: #8b5cf6;
+}
+
+.onHold {
+  background-color: #f97316;
+}
+
+.completed {
+  background-color: #10b981;
+}
+
+/* Status text colors */
+.notStartedText {
+  color: #6b7280;
+}
+
+.inProgressText,
+.uatText,
+.onHoldText {
+  color: #dc2626;
+}
+
+.completedText {
+  color: #059669;
+}
+
+.projectContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.projectTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.projectStatus {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}

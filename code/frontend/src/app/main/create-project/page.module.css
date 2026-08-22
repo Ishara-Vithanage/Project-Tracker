@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css?family=Antic&display=swap');
+
+.main_container {
+  padding: 20px;
+  font-family: 'Antic', sans-serif;
+  overflow-x: hidden;
+}
+
+.form {
+  height: 100%;
+  width: 100%;
+  padding: 40px 34% 40px 40px;
+  font-size: 16px;
+  color: var(--foreground);
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.subSection {
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 50px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.subheading {
+  letter-spacing: 2px;
+  padding: 5px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* ── Task List ── */
+.taskList {
+  margin-top: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.taskCard {
+  padding: 1rem 1.2rem;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  width: 65%;
+  transition: box-shadow 0.2s ease;
+}
+
+.taskCard:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.taskCardHeader {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.taskCardMeta {
+  display: flex;
+  gap: 1.4rem;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.35rem;
+}
+
+.taskCardDesc {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.35rem;
+}
+
+.taskCardDates {
+  font-size: 0.82rem;
+  color: #777;
+  margin-bottom: 0.6rem;
+}
+
+.btnSectionTask {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+/* ── Edit-mode inside task card ── */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.editRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.editField {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 140px;
+  min-width: 120px;
+}
+
+.editFieldWide {
+  display: flex;
+  flex-direction: column;
+  flex: 2 1 220px;
+  min-width: 180px;
+}
+
+.editField label,
+.editFieldWide label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: #444;
+  letter-spacing: 0.5px;
+}
+
+.editFieldWide textarea {
+  resize: vertical;
+  min-height: 60px;
+}

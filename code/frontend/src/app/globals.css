@@ -1,0 +1,122 @@
+:root {
+  --background: #dddfe8;
+  --foreground: #1a1a1a;
+  --accent: #9D3232;
+  --accent-hover: #b84343;
+  --card-bg: rgba(0, 0, 0, 0.03);
+  /* Softer card bg for light theme */
+  --border: rgba(0, 0, 0, 0.1);
+  /* Light border */
+}
+
+@import url('https://fonts.googleapis.com/css?family=ABeeZee&display=swap');
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  color: var(--foreground);
+  background-color: var(--background);
+  font-family: 'ABeeZee', sans-serif;
+  background-image: url("/background_light.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body {
+  transform: scale(0.9);
+  transform-origin: top left;
+  width: 111.1111%;
+  /* 100 / 0.9 */
+  height: 111.1111%;
+  /* 100 / 0.9 */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+h1,
+h2 {
+  font-weight: 300;
+  padding: 10px;
+  color: var(--foreground);
+}
+
+h1 {
+  padding-left: 20px;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+}
+
+label {
+  padding: 5px;
+}
+
+input,
+textarea,
+select {
+  background-color: rgba(255, 255, 255, 1);
+  /* Lightened for readability */
+  font-size: 14px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+input:focus,
+textarea:focus {
+  background-color: #ffffff;
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 5px var(--accent-hover);
+}
+
+:disabled {
+  background-color: #f0f0f0;
+  color: #999;
+}
+
+:disabled:hover {
+  background-color: #f0f0f0;
+  color: #999;
+}
+
+textarea {
+  height: 100px;
+  width: 400px;
+}
+
+button {
+  font-family: 'ABeeZee', sans-serif;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+}

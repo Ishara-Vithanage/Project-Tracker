@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css?family=Antic&display=swap');
+
+.container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+  font-family: 'Antic', sans-serif;
+}
+
+.heading {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.gridForm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+/* .input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+} */
+
+.subHeading {
+  letter-spacing: 2px;
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+  color: #222;
+}
+
+.taskSummary {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f9f9f9;
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskName {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.taskStatus {
+  font-size: 0.95rem;
+  padding: 0.25rem 0.75rem;
+  background-color: #e1e1e1;
+  border-radius: 6px;
+  color: #333;
+}
+
+.statusPending {
+  background-color: #f8d7da;
+  color: #a94442;
+}
+
+.statusCompleted {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.toggleButton {
+  background: transparent;
+  border: none;
+  color: #5c0000;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.input:disabled{
+  background-color: #f0f0f0;
+  color: #888;
+  cursor: default;
+  border: 1px solid #ddd;
+}
+
+.subtaskButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.toggleButton:hover {
+  background-color: var(--accent);
+  color: white;
+}
+
+.taskDetailsWrapper {
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  max-height: 0;
+  opacity: 0;
+}
+
+.taskDetailsExpanded {
+  max-height: 500px; /* Enough to accommodate the full content */
+  opacity: 1;
+}
+
+.taskDetails {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.radioLabel {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+  justify-content: flex-end;
+  text-align: right;
+  margin-top: 2rem;
+}
+
+.greenButton {
+  background-color: #0d8f63;
+  padding: 4px 12px;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.greenButton:hover {
+  background-color: #0f7452;
+}
+
+/* .button {
+  background-color: #0070f3;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #005bb5;
+} */
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #555;
+}

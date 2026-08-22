@@ -1,0 +1,345 @@
+.mainContainer {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcomeSection {
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.welcomeText {
+  display: flex;
+  align-items: end;
+  font-size: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.middleSection {
+  display: flex;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.middleleft {
+  width: 50%;
+  height: 100%;
+  border-radius: 12px;
+  overflow-y: auto;
+}
+
+.middleRight {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.middleRightTop {
+  height: 38%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.cardCount {
+  background: linear-gradient(to right, #f3f4f6, #e5e7eb);
+  /* subtle gradient */
+  border-radius: 12px;
+  padding: 24px 24px 0 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  min-width: 280px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardSlider {
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  min-width: 280px;
+  overflow: hidden;
+}
+
+.statsContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 10px;
+}
+
+.statBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.nullText {
+  color: #2e2e2e;
+}
+
+.nullTextCount {
+  font-size: 12px;
+  text-align: right;
+  font-weight: bold;
+  color: #2e2e2e;
+}
+
+.count {
+  font-size: 62px;
+  font-weight: bold;
+  color: darkred;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.labelTop {
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: darkred;
+  font-weight: 500;
+}
+
+.labelBottom {
+  font-size: 20px;
+  font-weight: 700;
+  color: darkred;
+  letter-spacing: 1px;
+}
+
+.viewLink {
+  font-size: 10px;
+  text-align: right;
+  color: #4b5563;
+  font-weight: 500;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-bottom: 2%;
+}
+
+.middleRightBottom {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 5px 20px 10px 20px;
+}
+
+.bottomSection {
+  flex: 0 0 auto;
+}
+
+.buttonLine {
+  height: 50%;
+  display: flex;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 33.33%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.4);
+}
+
+.buttonContent {
+  padding: 10px;
+}
+
+.statusIndicator {
+  width: 10%;
+  height: 100%;
+}
+
+/* Status: Not Started */
+.statusNotStarted .statusIndicator {
+  background-color: #9CA3AF;
+}
+
+.statusNotStarted .buttonContent,
+.statusNotStarted .projectCount {
+  color: #6B7280;
+}
+
+/* Status: In Progress */
+.statusInProgress .statusIndicator {
+  background-color: #3B82F6;
+}
+
+.statusInProgress .buttonContent,
+.statusInProgress .projectCount {
+  color: #1D4ED8;
+}
+
+/* Status: On Hold */
+.statusOnHold .statusIndicator {
+  background-color: #F97316;
+}
+
+.statusOnHold .buttonContent,
+.statusOnHold .projectCount {
+  color: #C2410C;
+}
+
+/* Status: UAT */
+.statusUAT .statusIndicator {
+  background-color: #8B5CF6;
+}
+
+.statusUAT .buttonContent,
+.statusUAT .projectCount {
+  color: #6D28D9;
+}
+
+/* Status: Completed */
+.statusCompleted .statusIndicator {
+  background-color: #10B981;
+}
+
+.statusCompleted .buttonContent,
+.statusCompleted .projectCount {
+  color: #047857;
+}
+
+.buttonContent {
+  width: 70%;
+}
+
+.projectCount {
+  width: 50%;
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  font-size: 50px;
+  padding: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .middleSection {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .middleleft,
+  .middleRight {
+    width: 100%;
+    height: auto;
+    max-height: none;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .count {
+    font-size: 48px;
+  }
+
+  .labelTop,
+  .labelBottom {
+    font-size: 14px;
+  }
+
+  .projectCount {
+    font-size: 40px;
+  }
+
+  .buttonLine {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .buttonContainer {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .welcomeText {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .statsContainer {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .statBox {
+    justify-content: space-between;
+  }
+
+  .card {
+    min-width: auto;
+  }
+
+  .labelTop,
+  .labelBottom {
+    text-align: left;
+  }
+
+  .viewLink {
+    text-align: center;
+    font-size: 9px;
+  }
+
+  .projectCount {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .count {
+    font-size: 36px;
+  }
+
+  .labelBottom {
+    font-size: 16px;
+  }
+
+  .buttonContent {
+    padding: 6px;
+  }
+
+  .projectCount {
+    font-size: 28px;
+    padding: 10px;
+  }
+
+  .welcomeText {
+    font-size: 9px;
+  }
+
+  .middleRightTop {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 10px;
+  }
+}

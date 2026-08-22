@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css?family=ABeeZee&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Antic&display=swap');
+
+.main_container {
+  padding: 20px;
+  font-family: 'Antic', sans-serif;
+}
+
+.form {
+  width: 100%;
+  max-width: 100%;
+  margin: auto;
+  padding: 40px;
+  font-family: 'ABeeZee', sans-serif;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 20px 40px;
+  color: #1f2937;
+}
+
+.inputLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.inputSearch {
+  width: 50%;
+  min-width: 250px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  font-size: 16px;
+  background-color: #ffffff;
+  color: #111827;
+}
+
+.filterRow {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filterLabel {
+  font-weight: 500;
+  font-size: 15px;
+  color: #4b5563;
+}
+
+.filterSelect {
+  padding: 4px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #111827;
+  border: 1px solid #cbd5e1;
+  outline: none;
+}
+
+.tableContainer {
+  width: 100%;
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin-top: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.styledTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.styledTable th {
+  padding: 16px 20px;
+  color: #475569;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  background-color: #f8fafc;
+  z-index: 10;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.styledTable tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+.styledTable tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.styledTable td {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #1e293b;
+  vertical-align: middle;
+}
+
+.projectNameTd {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.managerTd {
+  color: #475569;
+}
+
+.developersList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.developerBadge {
+  background-color: #707070;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* .moreDetailsBtn {
+  background-color: #4d4d4d;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  width: 90px;
+  height: 24px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.moreDetailsBtn:hover {
+  background-color: #374151;
+}
+
+.moreDetailsBtn:active {
+  transform: scale(0.98);
+} */
+
+.labelprojectStatus {
+  width: 130px;
+  height: 32px;
+  text-align: center;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.statusNotStarted {
+  background-color: #d1d5db;
+  /* Gray */
+}
+
+.statusInProgress {
+  background-color: #60a5fa;
+  /* Blue */
+}
+
+.statusUAT {
+  background-color: #a78bfa;
+  /* Purple */
+}
+
+.statusOnHold {
+  background-color: #fb923c;
+  /* Orange */
+}
+
+.statusLive {
+  background-color: #34d399;
+  /* Green */
+}
+
+.generateReportBtn {
+  margin-left: 20px;
+  background-color: #1e293b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'ABeeZee', sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.4px;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+}
+
+.generateReportBtn:hover {
+  background-color: #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.generateReportBtn:active {
+  transform: scale(0.97);
+}

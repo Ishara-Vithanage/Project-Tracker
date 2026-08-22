@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css?family=Antic&display=swap');
+
+.container {
+  padding: 20px;
+  font-family: 'Antic', sans-serif;
+}
+
+.heading {
+  font-size: 2rem;
+}
+
+.subHeading {
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+.tableWrapper {
+  width: 100%;
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin-top: 20px;
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  padding: 16px 20px;
+  color: #475569;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: sticky;
+  top: 0;
+  background-color: #f8fafc;
+  z-index: 10;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.table td {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #1e293b;
+  vertical-align: middle;
+}
+
+.searchSection {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.searchBar {
+  margin-bottom: 10px;
+  width: 30%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.editForm {
+  margin: 10px;
+}
+
+.actionBtnList {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* .actionBtn {
+  background-color: #4d4d4d;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  width: 90px;
+  height: 24px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.actionBtn:hover {
+  background-color: #374151;
+}
+
+.actionBtn:active {
+  transform: scale(0.98);
+} */
+
+.statusLabel {
+  width: 80px;
+  height: 24px;
+  text-align: center;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.statusActive {
+  background-color: #26966d;
+  /* Green */
+}
+
+.statusBlocked {
+  background-color: #b43333;
+  /* Red */
+}
+
+.input {
+  display: block;
+  margin: 0.5rem 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.btnSection {
+  max-width: 400px;
+  display: flex;
+  justify-content: flex-end;
+}
