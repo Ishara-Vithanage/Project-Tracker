@@ -6,20 +6,16 @@ import styles from "./page.module.css";
 import "@/app/globals.css";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/services/auth";
-import { getUsers } from "@/services/systemUsers";
 import { useUser } from "@/app/context/userProvider";
 import { useToast } from "../../components/toast/page";
 import logo from "/public/mainScreenLogo.png";
-import auditLog from "@/services/audit_log";
-import { updateUser } from "@/services/systemUsers";
-import getSriLankaTimeISO from "@/services/getSLTime";
 
 export default function Login() {
   const [userID, setUserID] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-  const { setUsername } = useUser();
+  const { setUsername, setUser } = useUser();
   const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -38,66 +34,18 @@ export default function Login() {
 
     setLoading(true); // Start loading
     try {
-      const users = await getUsers();
-      const foundUser = users.find((user: any) => user.userID === userID);
-
-      if (!foundUser) {
-        setError("User not found.");
-        setLoading(false);
-        return;
-      }
-
-      if (foundUser.status === "Blocked") {
-        setError("User blocked.");
-        setLoading(false);
-        return;
-      }
-
-      function cleanName(name: string): string {
-        return name.replace(/\s*\([^)]*\)\s*/g, "").trim();
-      }
-
-      const cleanedUser = {
-        ...foundUser,
-        name: cleanName(foundUser.name),
+      const response = await loginUser({ userId: userID, password });
+      const authenticatedUser = response.data.user;
+      const user = {
+        ...authenticatedUser,
+        userID: authenticatedUser.userId,
       };
 
-      setUsername(cleanedUser.userID);
-      sessionStorage.setItem("userData", JSON.stringify(cleanedUser));
-
-      const success = await loginUser({ userID, password });
-
-      if (success) {
-        showToast("Login successful", "success");
-
-        const updatedUser = {
-          ...cleanedUser,
-          lastLogin: getSriLankaTimeISO(),
-        };
-
-        await updateUser(updatedUser.userID, updatedUser);
-        setUsername(updatedUser.userID);
-        sessionStorage.setItem("userData", JSON.stringify(updatedUser));
-
-        const auditEntry = {
-          user: updatedUser.userID,
-          action: "Login",
-          keyValue: updatedUser.name,
-          tableName: "USER_LOG",
-          updateField: "",
-          newValue: "",
-          oldValue: "",
-          LMD: getSriLankaTimeISO(),
-        };
-
-        await auditLog(auditEntry);
-
-        // Push to home after all is done
-        router.push("/main/home");
-      } else {
-        setError("Invalid credentials.");
-        setLoading(false);
-      }
+      setUser(user);
+      setUsername(user.userID);
+      sessionStorage.setItem("userData", JSON.stringify(user));
+      showToast(response.data.message, "success");
+      router.push("/main/home");
     } catch (error) {
       console.error("Login error:", error);
       setError("Login failed. Try again.");
