@@ -2,7 +2,7 @@ import axios from 'axios';
 import { env } from 'process';
 
 // Base API URL
-const backendAPI = `${env.BASE_API_URL}/user`;
+const backendAPI = `${env.BASE_API_URL}/users`;
 
 // Define the structure of a user (you can customize this further)
 export interface User {
