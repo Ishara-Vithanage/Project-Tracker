@@ -17,9 +17,9 @@ export default function Home() {
   const [taskCounts, setTaskCounts] = useState<{ [status: string]: number }>({});
 
   const roleTitles: { [key: string]: string } = {
-    MGR: 'PROJECT MANAGER',
-    HEAD: 'DEPARTMENT HEAD',
-    DEV: 'DEVELOPER',
+    mgr: 'PROJECT MANAGER',
+    head: 'DEPARTMENT HEAD',
+    dev: 'DEVELOPER',
   };
 
   useEffect(() => {
@@ -29,12 +29,12 @@ export default function Home() {
       try {
         let projectList: any[] = [];
         let taskList: any[] = [];
-        if (user.role === 'MGR') {
+        if (user.role === 'mgr') {
           projectList = await GetProjectbyManager(user.userID);
           taskList = projectList.flatMap((project: any) => project.tasks || []);
         }
 
-        else if (user.role === 'HEAD') {
+        else if (user.role === 'head') {
           projectList = await GetProject();
           taskList = projectList.flatMap((project: any) => project.tasks || []);
         }

@@ -147,7 +147,7 @@ export default function MainScreen({ children, }: Readonly<{ children: React.Rea
 
                 {/*Footer section*/}
                 <div className={styles.footer_section}>
-                    <p>Copyright @ Seylan ITC-SE 2025</p>
+                    <p>Copyright @ ARAHSI 2026</p>
                 </div>
             </div>
         </div>

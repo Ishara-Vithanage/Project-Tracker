@@ -28,7 +28,7 @@ export default function ViewProject() {
 
       try {
         let data: any[] = [];
-        if (user.role === 'MGR' || user.role === 'HEAD') {
+        if (user.role === 'mgr' || user.role === 'head') {
           if (ownershipFilter === 'My Projects') {
             data = await GetProjectbyManager(user.userID);
           } else {
