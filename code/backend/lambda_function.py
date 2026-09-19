@@ -11,6 +11,9 @@ def lambda_handler(event, context):
     path = http_ctx.get("path", "")
     path_params = event.get("pathParameters") or {}
 
+    if http_method == "OPTIONS":
+        return ResponseHelper.send(204, {})
+
     try:
         body = json.loads(event.get("body", "{}")) if event.get("body") else {}
     except json.JSONDecodeError:

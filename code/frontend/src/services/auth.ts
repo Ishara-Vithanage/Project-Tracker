@@ -6,29 +6,43 @@
 //*****************************************************************************************
 
 import axios, { AxiosResponse } from 'axios';
-import { env } from 'process';
 
 // Define input shape for login
 export interface LoginCredentials {
-  userID: string;
+  userId: string;
   password: string;
 }
 
-// Define response shape (update based on actual API response structure)
-export interface LoginResponse {
-  token?: string;
-  message?: string;
-  [key: string]: any;
+export interface AuthenticatedUser {
+  department: string;
+  role: string;
+  userId: string;
+  status: string;
+  email: string;
+  name: string;
+  lastLogin: string;
 }
 
-const backendAPI = env.BASE_API_URL
+export interface LoginResponse {
+  message: string;
+  user: AuthenticatedUser;
+}
+
+interface UserDetailsResponse {
+  username: string;
+  department: string;
+  workEmail: string;
+}
+
+const backendAPI = process.env.NEXT_PUBLIC_BASE_API_URL
 
 // Login function
 const loginUser = async (
   values: LoginCredentials
 ): Promise<AxiosResponse<LoginResponse>> => {
   try {
-    const response = await axios.post<LoginResponse>(`${backendAPI}/Login`, values);
+    console.log("Login credentials:", values);
+    const response = await axios.post<LoginResponse>(`${backendAPI}/login`, values);
     console.log("Login response:", response.data);
     return response;
   } catch (error: any) {
@@ -46,10 +60,10 @@ const loginUser = async (
   }
 };
 
-const getUserDetails = async (userID: string) => {
+const getUserDetails = async (userID: string): Promise<UserDetailsResponse> => {
   try {
-    const response = await axios.post<LoginResponse>(`${backendAPI}/get-seylan-user-details`, {
-      userID: userID
+    const response = await axios.post<UserDetailsResponse>(`${backendAPI}/get-seylan-user-details`, {
+      userID,
     });
     return response.data;
   } catch (error: any) {
