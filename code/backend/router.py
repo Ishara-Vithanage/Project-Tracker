@@ -6,13 +6,11 @@ class Router:
         self.service = WorkspaceService()
 
     def route(self, method: str, path: str, path_params: dict, body: dict):
-        # Login Endpoints
-        if path == "/login" and method == "POST":
-            return self.service.login_user(body)
-
         # User Endpoints
         if path == "/users" and method == "POST":
             return self.service.create_user(body)
+        if path.startswith("/users/by-user-id/") and method == "GET":
+            return self.service.get_user_by_user_id(path_params)
         if path.startswith("/users/") and method == "GET":
             return self.service.get_user(path_params)
         if path.startswith("/users/") and method == "PUT":
