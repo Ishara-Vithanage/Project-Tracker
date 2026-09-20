@@ -5,10 +5,11 @@
 //** Purpose       : Service to send Emails using the Email API
 //*****************************************************************************************
 import axios from 'axios';
-import { env } from process;
+
+const backendAPI = process.env.NEXT_PUBLIC_BASE_API_URL
 
 // Define the base URL for Email API
-const API_URL = `${env.BASE_API_URL}/Mail/send-email`;
+const API_URL = `${backendAPI}/Mail/send-email`;
 
 // Service for sending an email
 const sendEmail = async (emailData) => {

@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { notFound } from 'next/navigation';
-import { env } from 'process';
 
 // Base API URL
-const backendAPI = env.BASE_API_URL
+const backendAPI = process.env.NEXT_PUBLIC_BASE_API_URL
 
 // Define the structure of a user (you can customize this further)
 interface SubTask {
@@ -33,7 +32,7 @@ interface ProjectInfo {
 // Get projectInfo
 const GetProject = async (): Promise<ProjectInfo[]> => {
   try {
-    const response = await axios.get<ProjectInfo[]>(`${backendAPI}/projectInfo`);
+    const response = await axios.get<ProjectInfo[]>(`${backendAPI}/projects`);
     return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -42,9 +41,9 @@ const GetProject = async (): Promise<ProjectInfo[]> => {
 };
 
 // Get ProjectInfo by ManagerID
-const GetProjectbyManager = async (managerID: string): Promise<ProjectInfo[]> => {
+const GetProjectbyManager = async (manager: string): Promise<ProjectInfo[]> => {
   try {
-    const response = await axios.get<ProjectInfo[]>(`${backendAPI}/ProjectInfo/by-manager/${managerID}`);
+    const response = await axios.get<ProjectInfo[]>(`${backendAPI}/projects/by-manager/${manager}`);
     if (response.status == 404) {
       notFound();
     }
@@ -57,9 +56,9 @@ const GetProjectbyManager = async (managerID: string): Promise<ProjectInfo[]> =>
 };
 
 // Get ProjectInfo by DeveloperID
-const GetProjectbyDeveloper = async (devID: string): Promise<ProjectInfo[]> => {
+const GetProjectbyDeveloper = async (developer: string): Promise<ProjectInfo[]> => {
   try {
-    const response = await axios.get<ProjectInfo[]>(`${backendAPI}/ProjectInfo/by-developer/${devID}`);
+    const response = await axios.get<ProjectInfo[]>(`${backendAPI}/projects/by-developer/${developer}`);
     if (response.status == 404) {
       notFound();
     }
@@ -74,7 +73,7 @@ const GetProjectbyDeveloper = async (devID: string): Promise<ProjectInfo[]> => {
 //Get ProjectInfo by ProjectID
 const GetProjectbyID = async (projectID: number): Promise<ProjectInfo> => {
   try {
-    const response = await axios.get<ProjectInfo>(`${backendAPI}/ProjectInfo/${projectID}`);
+    const response = await axios.get<ProjectInfo>(`${backendAPI}/projects/${projectID}`);
     if (response.status == 404) {
       notFound();
     }
@@ -89,7 +88,7 @@ const GetProjectbyID = async (projectID: number): Promise<ProjectInfo> => {
 // Get ProjectInfo by Department
 const GetProjectbyDepartment = async (businessUnit: string): Promise<ProjectInfo[]> => {
   try {
-    const response = await axios.get<ProjectInfo[]>(`${backendAPI}/ProjectInfo/by-department/${businessUnit}`);
+    const response = await axios.get<ProjectInfo[]>(`${backendAPI}/projects/by-department/${businessUnit}`);
     if (response.status == 404) {
       notFound();
     }
@@ -104,7 +103,7 @@ const GetProjectbyDepartment = async (businessUnit: string): Promise<ProjectInfo
 // Add a new Project
 const addProject = async (values: ProjectInfo): Promise<any> => {
   try {
-    const response = await axios.post(`${backendAPI}/ProjectInfo`, values);
+    const response = await axios.post(`${backendAPI}/projects`, values);
     if (response.status == 201) {
       console.log("Project added successfully", response)
     }
@@ -118,7 +117,7 @@ const addProject = async (values: ProjectInfo): Promise<any> => {
 // Update a Project
 const updateProject = async (projectID: number, values: ProjectInfo): Promise<any> => {
   try {
-    const response = await axios.put(`${backendAPI}/ProjectInfo/${projectID}`, values);
+    const response = await axios.put(`${backendAPI}/projects/${projectID}`, values);
     if (response.status == 200) {
       console.log("Project updated successfully", response)
     }
@@ -132,7 +131,7 @@ const updateProject = async (projectID: number, values: ProjectInfo): Promise<an
 // Delete a Project
 const deleteProject = async (projectID: number): Promise<any> => {
   try {
-    const response = await axios.delete(`${backendAPI}/ProjectInfo/${projectID}`);
+    const response = await axios.delete(`${backendAPI}/projects/${projectID}`);
     if (response.status == 200) {
       console.log("Project deleted successfully", response)
     }

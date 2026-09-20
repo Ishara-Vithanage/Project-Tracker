@@ -1,9 +1,8 @@
 import axios from 'axios';
 import { notFound } from 'next/navigation';
-import { env } from 'process';
 
 // Base API URL
-const backendAPI = `${env.BASE_API_URL}`;
+const backendAPI = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 // Define the structure of a user (you can customize this further)
 export interface SubTasks {
@@ -21,7 +20,7 @@ export interface SubTasks {
 // Get all tasks
 const GetTasks = async (): Promise<SubTasks[]> => {
   try {
-    const response = await axios.get<SubTasks[]>(`${backendAPI}/SubTasks`);
+    const response = await axios.get<SubTasks[]>(`${backendAPI}/tasks`);
     return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -30,9 +29,9 @@ const GetTasks = async (): Promise<SubTasks[]> => {
 };
 
 // Get Tasks by Manager
-const GetTaskbyManager = async (managerID: string): Promise<SubTasks[]> => {
+const GetTaskbyManager = async (manager: string): Promise<SubTasks[]> => {
   try {
-    const response = await axios.get<SubTasks[]>(`${backendAPI}/SubTasks/by-manager/${managerID}`);
+    const response = await axios.get<SubTasks[]>(`${backendAPI}/tasks/by-manager/${manager}`);
     if (response.status == 404) {
       notFound();
     }
@@ -45,9 +44,9 @@ const GetTaskbyManager = async (managerID: string): Promise<SubTasks[]> => {
 };
 
 // Get Tasks by Developer
-const GetTaskbyDeveloper = async (devID: string): Promise<SubTasks[]> => {
+const GetTaskbyDeveloper = async (devevloper: string): Promise<SubTasks[]> => {
   try {
-    const response = await axios.get<SubTasks[]>(`${backendAPI}/SubTasks/by-developer/${devID}`);
+    const response = await axios.get<SubTasks[]>(`${backendAPI}/tasks/by-developer/${devevloper}`);
     if (response.status == 404) {
       notFound();
     }

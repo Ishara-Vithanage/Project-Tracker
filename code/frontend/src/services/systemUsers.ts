@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { env } from 'process';
 
 // Base API URL
-const backendAPI = `${env.BASE_API_URL}/users`;
+const backendAPI = process.env.NEXT_PUBLIC_BASE_API_URL
 
 // Define the structure of a user (you can customize this further)
 export interface User {
@@ -21,7 +20,7 @@ type UserInput = Partial<User>;
 // 1. Get all users
 const getUsers = async (): Promise<User[]> => {
   try {
-    const response = await axios.get<User[]>(`${backendAPI}`);
+    const response = await axios.get<User[]>(`${backendAPI}/users`);
     return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -32,7 +31,7 @@ const getUsers = async (): Promise<User[]> => {
 // 1. Get user by ID
 const getUserbyUserID = async (id: string): Promise<User> => {
   try {
-    const response = await axios.get<User>(`${backendAPI}/${id}`);
+    const response = await axios.get<User>(`${backendAPI}/users/${id}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -54,7 +53,7 @@ const addUser = async (values: UserInput): Promise<any> => {
 // 3. Delete a user by ID
 const deleteUser = async (id: string): Promise<void> => {
   try {
-    await axios.delete(`${backendAPI}/${id}`);
+    await axios.delete(`${backendAPI}/users/${id}`);
   } catch (error) {
     console.error('Error deleting user:', error);
     throw error;
@@ -63,10 +62,10 @@ const deleteUser = async (id: string): Promise<void> => {
 
 // 4. Get users by type
 const getUsersAsType = async (
-  userType: string
+  userRole: string
 ): Promise<{ users: User[]; count: number }> => {
   try {
-    const response = await axios.get<User[]>(`${backendAPI}/getUserAsType?userType=${userType}`);
+    const response = await axios.get<User[]>(`${backendAPI}/users/by-role/${userRole}`);
     const users = response.data;
     return { users, count: users.length };
   } catch (error) {

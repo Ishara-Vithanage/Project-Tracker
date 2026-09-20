@@ -80,7 +80,7 @@ export default function MainScreen({ children, }: Readonly<{ children: React.Rea
                             </li>
                         </Link>
 
-                        {user?.role !== 'DEV' && (
+                        {user?.role !== 'dev' && (
                             <Link href="/main/create-project">
                                 <li className={`${styles.navLine} ${pathname === '/main/create-project/' ? styles.active : ''}`}>
                                     CREATE NEW
@@ -92,7 +92,7 @@ export default function MainScreen({ children, }: Readonly<{ children: React.Rea
                                 VIEW PROJECTS
                             </li>
                         </Link>
-                        {user?.role === 'HEAD' && (
+                        {user?.role === 'head' && (
                             <Link href="/main/manage-users">
                                 <li className={`${styles.navLine} ${pathname === '/main/manage-users/' ? styles.active : ''}`}>
                                     MANAGE USERS
@@ -100,7 +100,7 @@ export default function MainScreen({ children, }: Readonly<{ children: React.Rea
                             </Link>
                         )}
                         <>
-                            {user?.role === 'HEAD' && (
+                            {user?.role === 'head' && (
                                 <Link href="/main/inquiry">
                                     <li className={`${styles.navLine} ${pathname === '/main/inquiry/' ? styles.active : ''}`}>
                                         INQUIRY
@@ -147,7 +147,7 @@ export default function MainScreen({ children, }: Readonly<{ children: React.Rea
 
                 {/*Footer section*/}
                 <div className={styles.footer_section}>
-                    <p>Copyright @ Seylan ITC-SE 2025</p>
+                    <p>Copyright @ ARAHSI 2026</p>
                 </div>
             </div>
         </div>

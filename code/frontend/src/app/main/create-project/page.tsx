@@ -3,21 +3,21 @@
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import '@/app/globals.css';
-import { addProject } from '@/services/projectinfo';
+import { addProject, GetProject } from '@/services/projectinfo';
 import { getUsersAsType } from '@/services/systemUsers';
 import { useUser } from '@/app/context/userProvider';
 import AlertBox from '@/components/alert-box/page';
 import { useToast } from '@/components/toast/page';
 import { useRouter } from 'next/navigation';
-import sendEmail from '@/services/sendEmail';
-import mailtoDeveloper from '@/services/mailTemplates/toDeveloperCreate';
-import mailtoManager from '@/services/mailTemplates/toManagerCreate';
+// import sendEmail from '@/services/sendEmail';
+// import mailtoDeveloper from '@/services/mailTemplates/toDeveloperCreate';
+// import mailtoManager from '@/services/mailTemplates/toManagerCreate';
 import { getUserbyUserID } from '@/services/systemUsers';
 import auditLog from "@/services/audit_log";
 import getSriLankaTimeISO from "@/services/getSLTime";
 
 interface SubTask {
-  task_ID: number;
+  task_ID: string;
   name: string;
   description: string;
   developer: string;
@@ -27,6 +27,7 @@ interface SubTask {
 }
 
 interface ProjectInfo {
+  projectId: string;
   name: string;
   businessUnit: string;
   manager: string;
@@ -41,6 +42,15 @@ interface ProjectInfo {
 }
 
 type TaskFormState = Omit<SubTask, 'task_ID' | 'status'>;
+
+const getNextIdentifier = (identifiers: unknown[], prefix: string) => {
+  const highestIdentifier = identifiers.reduce<number>((highest, identifier) => {
+    const match = String(identifier ?? '').match(new RegExp(`^${prefix}(\\d+)$`));
+    return match ? Math.max(highest, Number(match[1])) : highest;
+  }, 0);
+
+  return `${prefix}${highestIdentifier + 1}`;
+};
 
 const emptyTaskForm: TaskFormState = {
   name: '',
@@ -66,19 +76,19 @@ export default function CreateProject() {
   const [currentTask, setCurrentTask] = useState<TaskFormState>(emptyTaskForm);
 
   // Edit state
-  const [editingTaskID, setEditingTaskID] = useState<number | null>(null);
+  const [editingTaskID, setEditingTaskID] = useState<string | null>(null);
   const [editTaskForm, setEditTaskForm] = useState<TaskFormState>(emptyTaskForm);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const [devData, mgrData] = await Promise.all([
-          getUsersAsType('DEV'),
-          getUsersAsType('MGR'),
+          getUsersAsType('dev'),
+          getUsersAsType('mgr'),
         ]);
         const combined = [
-          ...(devData.users ?? []).map(u => ({ ...u, role: 'DEV' })),
-          ...(mgrData.users ?? []).map(u => ({ ...u, role: 'MGR' })),
+          ...(devData.users ?? []).map(u => ({ ...u, role: 'dev' })),
+          ...(mgrData.users ?? []).map(u => ({ ...u, role: 'mgr' })),
         ];
         setDevelopers(combined);
       } catch (error) {
@@ -92,7 +102,7 @@ export default function CreateProject() {
   const addSubTask = () => {
     if (currentTask.name && currentTask.description) {
       const newTask: SubTask = {
-        task_ID: Date.now(),
+        task_ID: getNextIdentifier(subTasks.map(task => task.task_ID), 't'),
         name: currentTask.name,
         description: currentTask.description,
         developer: currentTask.developer,
@@ -105,7 +115,7 @@ export default function CreateProject() {
     }
   };
 
-  const deleteTask = (task_ID: number) => {
+  const deleteTask = (task_ID: string) => {
     setSubTasks(subTasks.filter(task => task.task_ID !== task_ID));
   };
 
@@ -125,7 +135,7 @@ export default function CreateProject() {
     setEditTaskForm(emptyTaskForm);
   };
 
-  const saveEditTask = (task_ID: number) => {
+  const saveEditTask = (task_ID: string) => {
     if (!editTaskForm.name || !editTaskForm.description) return;
     setSubTasks(prev =>
       prev.map(t =>
@@ -146,83 +156,93 @@ export default function CreateProject() {
   };
 
   const handleSubmit = async () => {
-    const projectData: ProjectInfo = {
-      name: projectName,
-      businessUnit,
-      manager: user?.userID || '',
-      startDate,
-      endDate,
-      description: projectDescription,
-      nature: projectNature,
-      createDate: new Date().toISOString().split('T')[0],
-      finishDate: new Date().toISOString().split('T')[0],
-      status: "Not Started",
-      tasks: subTasks.map(({ task_ID, ...taskWithoutId }) => taskWithoutId) as any,
-    };
-
     try {
+      const projects = await GetProject();
+      const projectId = getNextIdentifier(
+        projects.map(project => (project as unknown as { projectID?: string }).projectID),
+        'p'
+      );
+      const projectData = {
+        projectId,
+        name: projectName,
+        businessUnit,
+        manager: user?.userID || '',
+        startDate,
+        endDate,
+        description: projectDescription,
+        nature: projectNature,
+        createDate: new Date().toISOString().split('T')[0],
+        finishDate: new Date().toISOString().split('T')[0],
+        status: "not started",
+        tasks: subTasks.map(({ task_ID, ...taskWithoutId }) => ({
+          ...taskWithoutId,
+          Task_ID: task_ID,
+          projectID: projectId,
+        })),
+      };
+
       console.log("Submitting project data:", projectData);
-      await addProject(projectData);
+      await addProject(projectData as any);
       showToast("Project created successfully", "success");
       router.push('/main/create-project');
 
       const developerIDs = [...new Set(subTasks.map(task => task.developer).filter(Boolean))];
       const developerUserPromises = developerIDs.map(id => getUserbyUserID(id));
       const developerUsers = (await Promise.all(developerUserPromises)).flat();
-      const developerEmails = developerUsers
-        .map(devUser => devUser?.email)
-        .filter(email => email);
+      // const developerEmails = developerUsers
+      //   .map(devUser => devUser?.email)
+      //   .filter(email => email);
 
-      const developerEmailBody = mailtoDeveloper(
-        projectData.name,
-        subTasks.map(task => ({
-          name: task.name,
-          developer: developers.find(dev => dev.userID === task.developer)?.name || "Unassigned",
-          targetDate: task.targetDate,
-        }))
-      );
+      // const developerEmailBody = mailtoDeveloper(
+      //   projectData.name,
+      //   subTasks.map(task => ({
+      //     name: task.name,
+      //     developer: developers.find(dev => dev.userID === task.developer)?.name || "Unassigned",
+      //     targetDate: task.targetDate,
+      //   }))
+      // );
 
-      const managerEmail = user?.email;
-      const managerEmailBody = mailtoManager(
-        projectData.name,
-        subTasks.map(task => ({
-          name: task.name,
-          developer: developers.find(dev => dev.userID === task.developer)?.name || "Unassigned",
-          targetDate: task.targetDate,
-        }))
-      );
+      // const managerEmail = user?.email;
+      // const managerEmailBody = mailtoManager(
+      //   projectData.name,
+      //   subTasks.map(task => ({
+      //     name: task.name,
+      //     developer: developers.find(dev => dev.userID === task.developer)?.name || "Unassigned",
+      //     targetDate: task.targetDate,
+      //   }))
+      // );
 
-      const emailPromises = [];
+      // const emailPromises = [];
 
-      if (developerEmails.length > 0) {
-        emailPromises.push(sendEmail({
-          toEmail: developerEmails.join(','),
-          subject: `New Project Assigned: ${projectData.name}`,
-          body: developerEmailBody,
-        }));
-      }
+      // if (developerEmails.length > 0) {
+      //   emailPromises.push(sendEmail({
+      //     toEmail: developerEmails.join(','),
+      //     subject: `New Project Assigned: ${projectData.name}`,
+      //     body: developerEmailBody,
+      //   }));
+      // }
 
-      if (managerEmail) {
-        emailPromises.push(sendEmail({
-          toEmail: user?.email,
-          subject: `Project Created: ${projectData.name}`,
-          body: managerEmailBody,
-        }));
-      }
+      // if (managerEmail) {
+      //   emailPromises.push(sendEmail({
+      //     toEmail: user?.email,
+      //     subject: `Project Created: ${projectData.name}`,
+      //     body: managerEmailBody,
+      //   }));
+      // }
 
-      await Promise.all(emailPromises);
+      // await Promise.all(emailPromises);
 
-      const auditEntry = {
-        user: user.userID,
-        action: "New Project Created",
-        keyValue: projectName,
-        tableName: "PROJECT_INFO",
-        updateField: "",
-        newValue: "",
-        oldValue: "",
-        LMD: getSriLankaTimeISO(),
-      };
-      await auditLog(auditEntry);
+      // const auditEntry = {
+      //   user: user.userID,
+      //   action: "New Project Created",
+      //   keyValue: projectName,
+      //   tableName: "PROJECT_INFO",
+      //   updateField: "",
+      //   newValue: "",
+      //   oldValue: "",
+      //   LMD: getSriLankaTimeISO(),
+      // };
+      // await auditLog(auditEntry);
 
     } catch (error) {
       showToast("Error creating project: " + (error instanceof Error ? error.message : "Unknown error"), "error");
