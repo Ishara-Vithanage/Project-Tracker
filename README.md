@@ -21,7 +21,7 @@ The application is built on a 100% serverless, cost-optimized AWS architecture:
 ```
 [ Client Browser ]
        │
-       ▼ (HTTPS / Global CDN)
+       ▼ (HTTPS)
 [ Amazon S3 (Static Hosting) ]
        │
        ├──────────────────────────────────────────┐
@@ -41,12 +41,11 @@ The application is built on a 100% serverless, cost-optimized AWS architecture:
 
 | Layer | Service | Role & Functionality |
 | :--- | :--- | :--- |
-| **Frontend Hosting** | Amazon S3 & CloudFront | Hosts statically exported Next.js build artifacts with edge caching and SSL termination. |
+| **Frontend Hosting** | Amazon S3 | Hosts statically exported Next.js build artifacts with edge caching and SSL termination. |
 | **Authentication** | Amazon Cognito | Manages user sign-up/sign-in, token issuance (JWT), and role-based access levels. |
 | **API Gateway** | Amazon API Gateway (HTTP API) | Low-latency REST router mapping endpoints to the serverless compute layer. |
 | **Compute** | AWS Lambda | Python 3.12 execution engine running on Graviton2 (ARM64) for cost and execution efficiency. |
 | **Database** | Amazon DynamoDB | Fully managed, auto-scaling NoSQL database with dedicated tables for `Users`, `Projects`, and `Tasks`. |
-| **Notifications** | Amazon SES / SNS | Dispatches automated transactional notifications to team members on task state changes. |
 | **CI/CD** | AWS CodePipeline / CodeBuild | Automated build and deployment pipeline pulling from source control to S3 and Lambda. |
 
 ---
@@ -96,5 +95,10 @@ npm run build
 
 ## Deployment Workflow
 
-1. **Frontend:** Push changes to the `main` branch → **AWS CodePipeline** triggers **AWS CodeBuild** (`npm run build`) → Uploads `/out` artifacts to **Amazon S3** → Invalidates **CloudFront** cache.
+1. **Frontend:** Push changes to the `main` branch → **AWS CodePipeline** triggers **AWS CodeBuild** (`npm run build`) → Uploads `/out` artifacts to **Amazon S3** → Invalidates 
 2. **Backend:** Packaged Python handler deployed to **AWS Lambda** integrated with **HTTP API Gateway** and **DynamoDB**.
+
+## Screenshots
+
+<img width="683" height="301" alt="login" src="https://github.com/user-attachments/assets/491361c3-cc95-46f4-ac91-4c4b5d5019d2" /><img width="683" height="301" alt="home" src="https://github.com/user-attachments/assets/9897e9bf-38e5-49ee-9bd8-84d0193ffbcd" />
+
