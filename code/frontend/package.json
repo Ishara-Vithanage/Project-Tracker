@@ -12,6 +12,8 @@
     "fresh": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^6.20.0",
+    "aws-amplify": "^6.20.0",
     "axios": "^1.9.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^3.0.1",

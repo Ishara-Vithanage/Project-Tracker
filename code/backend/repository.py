@@ -32,14 +32,14 @@ class DynamoRepository:
         )
         return response.get("Item")
 
-    def get_user_for_login(self, user_input: str):
+    def get_user_by_user_id(self, user_id: str):
         response = self.table.scan(
-            FilterExpression=Attr("userId").eq(user_input)
+            FilterExpression=Attr("userID").eq(user_id)
         )
         items = response.get("Items", [])
         while response.get("LastEvaluatedKey") and not items:
             response = self.table.scan(
-                FilterExpression=Attr("userId").eq(user_input),
+                FilterExpression=Attr("userID").eq(user_id),
                 ExclusiveStartKey=response["LastEvaluatedKey"]
             )
             items.extend(response.get("Items", []))

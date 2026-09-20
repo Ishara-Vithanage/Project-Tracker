@@ -35,7 +35,7 @@ export default function Login() {
     setLoading(true); // Start loading
     try {
       const response = await loginUser({ userId: userID, password });
-      const authenticatedUser = response.data.user;
+      const authenticatedUser = response.user;
       const user = {
         ...authenticatedUser,
         userID: authenticatedUser.userId,
@@ -43,11 +43,12 @@ export default function Login() {
 
       setUser(user);
       setUsername(user.userID);
+      console.log("User logged in:", user);
       sessionStorage.setItem("userData", JSON.stringify(user));
-      showToast(response.data.message, "success");
+      showToast(response.message, "success");
       router.push("/main/home");
-    } catch (error) {
-      setError(error.message);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "An unexpected error occurred.");
       setLoading(false);
     }
   };

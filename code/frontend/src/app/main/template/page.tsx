@@ -13,6 +13,8 @@ import AlertBox from "@/components/alert-box/page";
 import { useRouter } from "next/navigation";
 import auditLog from "@/services/audit_log";
 import getSriLankaTimeISO from "@/services/getSLTime";
+import { signOut } from "aws-amplify/auth";
+import "@/services/cognito";
 
 export default function MainScreen({ children, }: Readonly<{ children: React.ReactNode; }>) {
 
@@ -29,6 +31,12 @@ export default function MainScreen({ children, }: Readonly<{ children: React.Rea
     const pathname = usePathname();
 
     const handleLogout = async () => {
+        try {
+            await signOut({ global: true });
+        } catch (error) {
+            console.error("Failed to sign out from Cognito:", error);
+        }
+
         sessionStorage.clear();
 
         const auditEntry = {

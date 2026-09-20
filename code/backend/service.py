@@ -5,31 +5,6 @@ class WorkspaceService:
     def __init__(self):
         self.repo = DynamoRepository()
 
-    # --- Login ---
-    def login_user(self, body: dict):
-        user_id = body.get("userId")
-        input_password = body.get("password")
-        if not user_id or not input_password:
-            return ResponseHelper.send(400, {"error": "userId and password are required"})
-        item = self.repo.get_user_for_login(user_id)
-        if not item:
-            return ResponseHelper.send(401, {"error": "Invalid userId or password"})
-        user_status = item.get("status")
-        if user_status != "active":
-            return ResponseHelper.send(401, {"error": "User is inactive"})
-        stored_password = item.get("password")
-        if stored_password != input_password:
-            return ResponseHelper.send(401, {"error": "Invalid userId or password"})
-        
-        keys_to_remove = ["password", "SK", "PK"]
-        for key in keys_to_remove:
-            item.pop(key, None)
-
-        return ResponseHelper.send(200, {
-            "message": "Login successful",
-            "user": item
-        })
-    
     def create_user(self, body: dict):
         user_id = body.get("userId")
         if not user_id:
@@ -43,6 +18,18 @@ class WorkspaceService:
         if not item:
             return ResponseHelper.send(404, {"error": "User not found"})
         # Remove sensitive password field
+        item.pop("password", None)
+        return ResponseHelper.send(200, item)
+
+    def get_user_by_user_id(self, path_params: dict):
+        user_id = path_params.get("userId")
+        if not user_id:
+            return ResponseHelper.send(400, {"error": "userId is required"})
+
+        item = self.repo.get_user_by_user_id(user_id)
+        if not item:
+            return ResponseHelper.send(404, {"error": "User not found"})
+
         item.pop("password", None)
         return ResponseHelper.send(200, item)
 
