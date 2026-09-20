@@ -22,7 +22,7 @@ The application is built on a 100% serverless, cost-optimized AWS architecture:
 [ Client Browser ]
        │
        ▼ (HTTPS / Global CDN)
-[ Amazon CloudFront + Amazon S3 (Static Hosting) ]
+[ Amazon S3 (Static Hosting) ]
        │
        ├──────────────────────────────────────────┐
        │ (Authentication)                         │ (API Requests / JWT Token)
