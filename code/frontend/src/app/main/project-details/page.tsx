@@ -9,9 +9,9 @@ import { useUser } from '@/app/context/userProvider';
 import styles from './page.module.css';
 import AlertBox from '@/components/alert-box/page';
 import { useToast } from '@/components/toast/page';
-import mailtoDeveloper from '@/services/mailTemplates/toDeveloperUpdate';
-import mailtoManager from '@/services/mailTemplates/toManagerUpdate';
-import sendEmail from '@/services/sendEmail';
+// import mailtoDeveloper from '@/services/mailTemplates/toDeveloperUpdate';
+// import mailtoManager from '@/services/mailTemplates/toManagerUpdate';
+// import sendEmail from '@/services/sendEmail';
 import { getUserbyUserID } from '@/services/systemUsers';
 import auditLog from "@/services/audit_log";
 import getSriLankaTimeISO from "@/services/getSLTime";
@@ -40,8 +40,8 @@ export default function ProjectDetails() {
   const [showReport, setShowReport] = useState(false);
 
   const isManager = user?.userID === project?.manager;
-  const isHead = user?.role === 'HEAD';
-  const isDeveloper = user?.role === 'DEV';
+  const isHead = user?.role === 'head';
+  const isDeveloper = user?.role === 'dev';
   const loggedDev = user.userID;
 
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function ProjectDetails() {
 
         try {
           const devData = await getUsersAsType('DEV');
-          devUsers = (devData.users ?? []).map((u: any) => ({ ...u, role: 'DEV' }));
+          devUsers = (devData.users ?? []).map((u: any) => ({ ...u, role: 'dev' }));
           console.log('DEV users fetched:', devUsers);
         } catch (e) {
           console.error('Failed to fetch DEV users:', e);
@@ -92,7 +92,7 @@ export default function ProjectDetails() {
 
         try {
           const mgrData = await getUsersAsType('MGR');
-          mgrUsers = (mgrData.users ?? []).map((u: any) => ({ ...u, role: 'MGR' }));
+          mgrUsers = (mgrData.users ?? []).map((u: any) => ({ ...u, role: 'mgr' }));
           console.log('MGR users fetched:', mgrUsers);
         } catch (e) {
           console.error('Failed to fetch MGR users:', e);
@@ -110,17 +110,17 @@ export default function ProjectDetails() {
   }, [projectID]);
 
   const handleStatusChange = (newStatus: string) => {
-    if (project.status === 'Not Started' && newStatus === 'Completed') {
+    if (project.status === 'not started' && newStatus === 'completed') {
       setProject((prev: any) => ({
         ...prev,
-        status: 'In Progress',
+        status: 'in progress',
       }));
     }
 
-    if (project.status === 'Live' && newStatus !== 'Live') {
+    if (project.status === 'live' && newStatus !== 'live') {
       setProject((prev: any) => ({
         ...prev,
-        status: 'In Progress',
+        status: 'in progress',
       }));
     }
   };
@@ -146,60 +146,60 @@ export default function ProjectDetails() {
       showToast('Project updated successfully!', 'success');
       router.push('/main/view-project');
 
-      const developerEmails = devMails.filter(email => email !== undefined && email !== null);
+      // const developerEmails = devMails.filter(email => email !== undefined && email !== null);
 
-      const developerEmailBody = mailtoDeveloper(
-        project.name,
-        project.tasks.map((task: Task) => ({
-          name: task.name,
-          developer: developers.find(dev => dev.userID === task.developer)?.name || "Unassigned",
-          targetDate: task.targetDate
-        }))
-      );
+      // const developerEmailBody = mailtoDeveloper(
+      //   project.name,
+      //   project.tasks.map((task: Task) => ({
+      //     name: task.name,
+      //     developer: developers.find(dev => dev.userID === task.developer)?.name || "Unassigned",
+      //     targetDate: task.targetDate
+      //   }))
+      // );
 
-      const managerID = project.manager;
-      const managerDetails = await getUserbyUserID(managerID);
-      const managerEmail = managerDetails?.email;
-      const managerEmailBody = mailtoManager(
-        project.name,
-        project.tasks.map((task: Task) => ({
-          name: task.name,
-          developer: developers.find(dev => dev.userID === task.developer)?.name || "Unassigned",
-          targetDate: task.targetDate
-        }))
-      );
+      // const managerID = project.manager;
+      // const managerDetails = await getUserbyUserID(managerID);
+      // const managerEmail = managerDetails?.email;
+      // const managerEmailBody = mailtoManager(
+      //   project.name,
+      //   project.tasks.map((task: Task) => ({
+      //     name: task.name,
+      //     developer: developers.find(dev => dev.userID === task.developer)?.name || "Unassigned",
+      //     targetDate: task.targetDate
+      //   }))
+      // );
 
-      const emailPromises = [];
+      // const emailPromises = [];
 
-      if (developerEmails.length > 0) {
-        emailPromises.push(sendEmail({
-          toEmail: developerEmails.join(','),
-          subject: `Project updated: ${project.name}`,
-          body: developerEmailBody
-        }));
-      }
+      // if (developerEmails.length > 0) {
+      //   emailPromises.push(sendEmail({
+      //     toEmail: developerEmails.join(','),
+      //     subject: `Project updated: ${project.name}`,
+      //     body: developerEmailBody
+      //   }));
+      // }
 
-      if (managerEmail) {
-        emailPromises.push(sendEmail({
-          toEmail: managerEmail,
-          subject: `Project Updated: ${project.name}`,
-          body: managerEmailBody
-        }));
-      }
-      await Promise.all(emailPromises);
+      // if (managerEmail) {
+      //   emailPromises.push(sendEmail({
+      //     toEmail: managerEmail,
+      //     subject: `Project Updated: ${project.name}`,
+      //     body: managerEmailBody
+      //   }));
+      // }
+      // await Promise.all(emailPromises);
 
       // Audit log entry
-      const auditEntry = {
-        user: user.userID,
-        action: "Project Updated",
-        keyValue: project.name,
-        tableName: "PROJECT_INFO",
-        updateField: "",
-        newValue: "",
-        oldValue: "",
-        LMD: new Date().toISOString(),
-      };
-      await auditLog(auditEntry);
+      // const auditEntry = {
+      //   user: user.userID,
+      //   action: "Project Updated",
+      //   keyValue: project.name,
+      //   tableName: "PROJECT_INFO",
+      //   updateField: "",
+      //   newValue: "",
+      //   oldValue: "",
+      //   LMD: new Date().toISOString(),
+      // };
+      // await auditLog(auditEntry);
 
     } catch (error) {
       console.error('Update failed:', error);
@@ -315,22 +315,22 @@ export default function ProjectDetails() {
             disabled={project.manager !== user.userID}
           >
             <option
-              value="Not Started"
-              disabled={project.tasks.some((task: any) => task.status === 'Completed')}
+              value="not started"
+              disabled={project.tasks.some((task: any) => task.status === 'completed')}
             >
               NOT STARTED
             </option>
             <option value="In Progress">IN PROGRESS</option>
             <option value="On Hold">ON HOLD</option>
             <option
-              value="UAT"
-              disabled={project.tasks.some((task: any) => task.status !== 'Completed')}
+              value="uat"
+              disabled={project.tasks.some((task: any) => task.status !== 'completed')}
             >
               UAT
             </option>
             <option
-              value="Live"
-              disabled={project.tasks.some((task: any) => task.status !== 'Completed')}
+              value="live"
+              disabled={project.tasks.some((task: any) => task.status !== 'completed')}
             >
               LIVE
             </option>
@@ -348,7 +348,7 @@ export default function ProjectDetails() {
             <span className={styles.taskName}>{task.name}</span>
             <div className={styles.subtaskButtons}>
               <span
-                className={`${styles.taskStatus} ${task.status === 'Completed' ? styles.statusCompleted : styles.statusPending
+                className={`${styles.taskStatus} ${task.status === 'completed' ? styles.statusCompleted : styles.statusPending
                   }`}
               >
                 {task.status.toUpperCase()}
@@ -424,14 +424,14 @@ export default function ProjectDetails() {
               <div className={styles.inputGroup}>
                 <label>Status</label>
                 <div className={styles.radioGroup}>
-                  {['Pending', 'Completed'].map((statusOption) => (
+                  {['pending', 'completed'].map((statusOption) => (
                     <label key={statusOption} className={styles.radioLabel}>
                       <input
                         type="radio"
                         name={`task-${index}-status`}
                         value={statusOption}
                         checked={task.status === statusOption}
-                        disabled={!(isDeveloper && loggedDev === task.developer && project.status !== 'Not Started' || isManager)}
+                        disabled={!(isDeveloper && loggedDev === task.developer && project.status !== 'not started' || isManager)}
                         onChange={() => {
                           const updated = [...project.tasks];
                           updated[index].status = statusOption;

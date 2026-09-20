@@ -47,8 +47,7 @@ export default function Login() {
       showToast(response.data.message, "success");
       router.push("/main/home");
     } catch (error) {
-      console.error("Login error:", error);
-      setError("Login failed. Try again.");
+      setError(error.message);
       setLoading(false);
     }
   };
@@ -105,7 +104,7 @@ export default function Login() {
 
         {/* Bottom section */}
         <div className={styles.bottom_section}>
-          <p className={styles.footer}>Copyright @ Seylan ITC-SE 2025</p>
+          <p className={styles.footer}>Copyright @ ARAHSI 2026</p>
         </div>
       </div>
       {/* Loading overlay */}
