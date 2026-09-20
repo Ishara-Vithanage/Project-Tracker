@@ -9,9 +9,8 @@
 - **Project & Task Management:** Create projects, break down deliverables into sub-tasks, and assign developers.
 - **Progress Tracking & Analytics:** Real-time dashboards visualizing milestone completion and sprint health.
 - **Resource & Availability Metrics:** Measure developer workload and capacity to prevent bottlenecks.
-- **Automated Email Notifications:** Amazon SES/SNS alerts for task assignments, status updates, and deadline reminders.
 - **Role-Based Access Control (RBAC):** Granular authorization for Department Heads, Project Managers, and Developers.
-
+- **Automated CI/CD Pipeline:** Fully automated deployment workflows powered by AWS CodePipeline and AWS CodeBuild.
 ---
 
 ## System Architecture
@@ -55,6 +54,10 @@ The application is built on a 100% serverless, cost-optimized AWS architecture:
 * **`Users` Table:** `id` (Partition Key), `name`, `email`, `role` (`Manager`, `Developer`, `DepartmentHead`), `capacity`
 * **`Projects` Table:** `id` (Partition Key), `title`, `description`, `status`, `managerId`, `deadline`, `createdAt`
 * **`Tasks` Table:** `id` (Partition Key), `projectId` (GSI), `assignedTo`, `title`, `priority`, `status`, `dueDate`
+
+## CI/CD Pipeline (AWS CodePipeline)
+
+The application utilizes an automated **AWS CodePipeline** workflow configured with distinct stages to enable zero-downtime continuous deployment:
 
 ---
 
@@ -100,5 +103,7 @@ npm run build
 
 ## Screenshots
 
-<img width="683" height="301" alt="login" src="https://github.com/user-attachments/assets/491361c3-cc95-46f4-ac91-4c4b5d5019d2" /><img width="683" height="301" alt="home" src="https://github.com/user-attachments/assets/9897e9bf-38e5-49ee-9bd8-84d0193ffbcd" />
+<img width="683" height="301" alt="login" src="https://github.com/user-attachments/assets/491361c3-cc95-46f4-ac91-4c4b5d5019d2" /><img width="683" height="301" alt="home" src="https://github.com/user-attachments/assets/dcfa6838-af54-4770-a8f8-d2cc428a915c" />
+
+
 
